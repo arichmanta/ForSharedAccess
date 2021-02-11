@@ -1,4 +1,4 @@
-
+//ot podskazchika, esli how poprobui takoi metod
 // Updates the world.
 void Game::Update(DX::StepTimer const& timer)
 {
@@ -31,17 +31,26 @@ void Game::Update(DX::StepTimer const& timer)
             PosToCameraAngle.x = 179.999;
         
         PosToCameraAngle.y = PosToCameraAngle.x;
+//lishnee
+        //if (PosToCameraAngle.z > 180)
+          //  PosToCameraAngle.z = -179.999;
+        //if (PosToCameraAngle.z < -180)
+          //  PosToCameraAngle.z = 179.999;
 
-        if (PosToCameraAngle.z > 180)
-            PosToCameraAngle.z = -179.999;
-        if (PosToCameraAngle.z < -180)
-            PosToCameraAngle.z = 179.999;
-
-
+	//dvijenie po okrujnosti osi XY
         AngleCameraX = cos(PosToCameraAngle.x * XM_PI / 180); //znachenie ot 0 do 1
         AngleCameraY = sin(PosToCameraAngle.y * XM_PI / 180); //znachenie ot 0 do 1
-        AngleCameraZ = -tan(PosToCameraAngle.z * XM_PI / 180); //znachenie ot 0 do 1
-
+	//metod gde mi sovershaem cursorom dvizhenie po okrujnosti osi ZY po analogii s XY
+	AngleCameraZY =	sin(PosToCameraAngle.z * XM_PI / 180); //znachenie ot 0 do 1
+        AngleCameraZ = cos(PosToCameraAngle.z * XM_PI / 180); //znachenie ot 0 do 1
+	//sumeruev offseti smejnih osei
+	AngleCameraY+=AngleCameraZY;
+	//tak kak mi privodim dvizhenie po edenichnoi okrujnosti dvijenie vverh mi obiazani priviasat k visote modeli
+	AngleCameraZ *= model_height/1.5;
+	//jelatelno takuiu je privasku sdelat i k XY vzyav bolwee iz shirini i dlini modeli
+	AngleCameraX *= max(model_length, model_width)/1.5;
+	AngleCameraY *= max(model_length, model_width)/1.5;
+	
 		//vozvrashaem kursor v center
         SetCursorPos(WindowRect.right - (m_outputWidth / 2), WindowRect.bottom - (m_outputHeight / 2));
 
