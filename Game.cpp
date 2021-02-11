@@ -38,11 +38,12 @@ void Game::Update(DX::StepTimer const& timer)
           //  PosToCameraAngle.z = 179.999;
 
 	//dvijenie po okrujnosti osi XY
-        AngleCameraX = cos(PosToCameraAngle.x * XM_PI / 180); //znachenie ot 0 do 1
-        AngleCameraY = sin(PosToCameraAngle.y * XM_PI / 180); //znachenie ot 0 do 1
+        AngleCameraX = cos(PosToCameraAngle.x * XM_PI / 180); //znachenie ot -1 do 1
+        AngleCameraY = sin(PosToCameraAngle.y * XM_PI / 180); //znachenie ot -1 do 1
 	//metod gde mi sovershaem cursorom dvizhenie po okrujnosti osi ZY po analogii s XY
-	AngleCameraZY =	sin(PosToCameraAngle.z * XM_PI / 180); //znachenie ot 0 do 1
-        AngleCameraZ = cos(PosToCameraAngle.z * XM_PI / 180); //znachenie ot 0 do 1
+	AngleCameraZY = cos(PosToCameraAngle.z * XM_PI / 180); //znachenie ot 0 do 1
+	//navernoe tut -sin sudya potomu kakoi u tebya znak u tan bil iz za invertirovaniya no eto ne tochno Kappa da i cos s sin ya mogu putat po etomu srazu ne napisal pravilno
+        AngleCameraZ = -sin(PosToCameraAngle.z * XM_PI / 180); //znachenie ot -1 do 1
 	//sumeruev offseti smejnih osei
 	AngleCameraY+=AngleCameraZY;
 	//tak kak mi privodim dvizhenie po edenichnoi okrujnosti dvijenie vverh mi obiazani priviasat k visote modeli
