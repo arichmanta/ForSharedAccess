@@ -44,8 +44,12 @@ void Game::Update(DX::StepTimer const& timer)
 	AngleCameraZY = cos(PosToCameraAngle.z * XM_PI / 180); //znachenie ot 0 do 1
 	//navernoe tut -sin sudya potomu kakoi u tebya znak u tan bil iz za invertirovaniya no eto ne tochno Kappa da i cos s sin ya mogu putat po etomu srazu ne napisal pravilno
         AngleCameraZ = -sin(PosToCameraAngle.z * XM_PI / 180); //znachenie ot -1 do 1
-	//sumeruev offseti smejnih osei
+	//sumiruev offseti smejnih osei
 	AngleCameraY+=AngleCameraZY;
+	 
+	//est eshe mikroshans chto tak ne srabotaet i nado dobavliat smejnui ZX a ne ZY i togda budet tak vmesto togo chto vishe
+	//AngleCameraX+=AngleCameraZY;
+	    
 	//tak kak mi privodim dvizhenie po edenichnoi okrujnosti dvijenie vverh mi obiazani priviasat k visote modeli
 	AngleCameraZ *= model_height/1.5;
 	//jelatelno takuiu je privasku sdelat i k XY vzyav bolwee iz shirini i dlini modeli
